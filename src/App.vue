@@ -1,17 +1,17 @@
 <template>
   <div id="app">
-    <index />
+    <multiSelect />
   </div>
 </template>
 
 <script>
-import index from "@/pages/index";
+import multiSelect from "@/components/multiSelect";
 export default {
   name: "App",
 
   components: {
-    index
-  }
+    multiSelect,
+  },
 };
 </script>
 

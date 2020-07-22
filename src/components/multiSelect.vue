@@ -3,7 +3,14 @@
     <div class="wiki__lang">
       <ul class="wiki__items">
         <label class="wiki__label" for="search">Язык:</label>
-        <input class="wiki__search" @input="sortVal" type="text" v-model="search" />
+        <input
+          class="wiki__search"
+          @input="sortVal"
+          @keydown.down="keyDown"
+          @keydown.esc="closeSearch"
+          type="text"
+          v-model="search"
+        />
         <button class="wiki__btn" @click="open = !open">C</button>
 
         <li
@@ -25,7 +32,7 @@
 
 <script>
 export default {
-  name: "Wiki",
+  name: "multiSelect",
 
   data() {
     return {
@@ -37,26 +44,33 @@ export default {
         { id: 1, lang: "Русский" },
         { id: 2, lang: "Английский" },
         { id: 3, lang: "Абхазский" },
-        { id: 4, lang: "Аври" }
-      ]
+        { id: 4, lang: "Аври" },
+      ],
     };
   },
 
   methods: {
     checkThis(event) {
       this.newArr.push(event.target.textContent);
-      console.log(this.newArr);
     },
     delItem(event) {
       this.newArr.splice(event.target.textContent, 1);
-    }
+    },
+    keyDown(e) {
+      console.log(e.target);
+    },
+    closeSearch() {
+      if (this.open === true) {
+        this.open = !true;
+      }
+    },
   },
   computed: {
     sortVal() {
-      return this.cell.filter(item => {
+      return this.cell.filter((item) => {
         return item.lang.toLowerCase().includes(this.search.toLowerCase());
       });
-    }
+    },
   },
 
   watch: {
@@ -64,8 +78,8 @@ export default {
       if (this.search.length > 0) {
         this.open = true;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
