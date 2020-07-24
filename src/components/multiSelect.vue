@@ -6,12 +6,11 @@
         <input
           class="wiki__search"
           @input="sortVal"
-          @keydown.down="keyDown"
           @keydown.esc="closeSearch"
           type="text"
           v-model="search"
         />
-        <button class="wiki__btn" @click="open = !open">C</button>
+        <button class="wiki__btn" @click="open = !open">X</button>
 
         <li
           class="wiki__item"
@@ -19,14 +18,14 @@
           v-for="item in sortVal"
           :key="item.id"
           @click="checkThis"
+          @keydown.down="keyDown"
+          :tabindex="item.id"
         >{{ item.lang }}</li>
         <ul class="wiki__check--items">
           <li class="wiki__check" v-for="lang in newArr" :key="lang.id" @click="delItem">{{lang}}</li>
         </ul>
       </ul>
     </div>
-
-    <hr />
   </div>
 </template>
 
@@ -93,7 +92,6 @@ export default {
   margin: 0 auto;
   background-color: #fff;
   color: #55677d;
-  border: 1px solid blue;
 }
 .wiki__items {
   position: relative;
@@ -111,6 +109,9 @@ export default {
   cursor: pointer;
   &:hover {
     background-color: #e5ebf1;
+  }
+  &:focus {
+    border: px solid aquamarine;
   }
 }
 .wiki__label {
